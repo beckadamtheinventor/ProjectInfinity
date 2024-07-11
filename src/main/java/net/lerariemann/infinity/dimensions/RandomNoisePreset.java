@@ -119,7 +119,7 @@ public class RandomNoisePreset {
     }
 
     NbtCompound buildSurfaceRule() {
-        parent.deepslate = parent.randomiseblocks ? PROVIDER.randomBlock(parent.random, "full_blocks_worldgen") :
+        parent.deepslate = parent.randomiseblocks ? PROVIDER.randomBlock(parent.random, "stone_like_blocks") :
                 RandomProvider.Block("minecraft:deepslate");
         int i = 0;
         switch (surface_rule) {
@@ -188,13 +188,13 @@ public class RandomNoisePreset {
             String biome = "infinity:biome_" + id;
             String root = PROVIDER.configPath + "util/surface_rule/custom/";
             boolean useRandomBlock = parent.randomiseblocks && PROVIDER.roll(parent.random, "randomise_biome_blocks");
-            NbtCompound top_block = useRandomBlock ? randomBlock("top_blocks") :
+            NbtCompound top_block = useRandomBlock ? randomBlock("ground_like_blocks") :
                     RandomProvider.Block(parent.defaultblock("minecraft:grass_block"));
             parent.top_blocks.put(biome, top_block);
-            NbtCompound block_underwater = useRandomBlock ? randomBlock("full_blocks_worldgen") :
+            NbtCompound block_underwater = useRandomBlock ? randomBlock("ground_like_blocks") :
                     RandomProvider.Block(parent.defaultblock("minecraft:dirt"));
             parent.underwater.put(biome, block_underwater);
-            NbtCompound beach = useRandomBlock ? randomBlock("full_blocks_worldgen") : top_block;
+            NbtCompound beach = useRandomBlock ? randomBlock("ground_like_blocks") : top_block;
             NbtCompound rule1 = CommonIO.readCarefully(root + "ceiling.json",
                     CommonIO.CompoundToString(parent.deepslate, 5), CommonIO.CompoundToString(parent.default_block, 4));
             NbtCompound rule2 = CommonIO.readCarefully(root + "grass.json",
