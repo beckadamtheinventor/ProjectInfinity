@@ -173,26 +173,46 @@ public class RandomProvider {
             WeighedStructure<NbtElement> topblocks = new WeighedStructure<>();
             WeighedStructure<NbtElement> fullblocks = new WeighedStructure<>();
             WeighedStructure<NbtElement> fullblockswg = new WeighedStructure<>();
+            WeighedStructure<NbtElement> groundlikeblocks = new WeighedStructure<>();
+            WeighedStructure<NbtElement> stonelikeblocks = new WeighedStructure<>();
+            WeighedStructure<NbtElement> loglikeblocks = new WeighedStructure<>();
+            WeighedStructure<NbtElement> leaflikeblocks = new WeighedStructure<>();
+            WeighedStructure<NbtElement> plantlikeblocks = new WeighedStructure<>();
             for (int i = 0; i < temp.get("blocks").keys.size(); i++) {
                 NbtCompound e = (NbtCompound)(temp.get("blocks").keys.get(i));
-                boolean isfull, istop, isfloat, islaggy;
+                boolean isfull, istop, isfloat, islaggy, isgroundlike, isstonelike, isloglike, isleaflike, isplantlike;
                 isfull = check(e, "full", false);
                 islaggy = check(e, "laggy", false);
                 isfloat = check(e, "float", isfull);
                 istop = check(e, "top", isfull);
                 istop = istop || isfloat;
+                isloglike = check(e, "loglike", false);
+                isleaflike = check(e, "leaflike", false);
+                isplantlike = check(e, "plantlike", isleaflike);
+                isgroundlike = check(e, "groundlike", !(isloglike||isleaflike||isplantlike));
+                isstonelike = check(e, "stonelike", !(isloglike||isleaflike||isplantlike));
                 Double w = temp.get("blocks").weights.get(i);
                 allblocks.add(e, w);
                 if (isfull) fullblocks.add(e, w);
                 if (istop && !islaggy) topblocks.add(e, w);
                 if (isfloat) blocksfeatures.add(e, w);
                 if (isfull && isfloat && !islaggy) fullblockswg.add(e, w);
+                if (isstonelike) stonelikeblocks.add(e, w);
+                if (isgroundlike) groundlikeblocks.add(e, w);
+                if (isloglike) loglikeblocks.add(e, w);
+                if (isleaflike) leaflikeblocks.add(e, w);
+                if (isplantlike) plantlikeblocks.add(e, w);
             }
             blockRegistry.put("all_blocks", allblocks);
             blockRegistry.put("blocks_features", blocksfeatures);
             blockRegistry.put("full_blocks", fullblocks);
             blockRegistry.put("full_blocks_worldgen", fullblockswg);
             blockRegistry.put("top_blocks", topblocks);
+            blockRegistry.put("ground_like_blocks", groundlikeblocks);
+            blockRegistry.put("stone_like_blocks", stonelikeblocks);
+            blockRegistry.put("log_like_blocks", loglikeblocks);
+            blockRegistry.put("leaf_like_blocks", leaflikeblocks);
+            blockRegistry.put("plant_like_blocks", plantlikeblocks);
             temp.keySet().forEach(a -> {
                 if (!Objects.equals(a, "blocks")) blockRegistry.put(a, temp.get(a));
             });

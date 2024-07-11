@@ -17,7 +17,7 @@ public class RandomIceberg extends RandomisedFeature {
 
     NbtCompound feature() {
         NbtCompound config = new NbtCompound();
-        addRandomBlock(config, "state", "full_blocks_worldgen");
+        addRandomBlock(config, "state", "ground_like_blocks");
         return feature(config);
     }
 }

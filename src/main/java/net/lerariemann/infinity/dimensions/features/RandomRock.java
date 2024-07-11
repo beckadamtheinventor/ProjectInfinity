@@ -19,7 +19,7 @@ public class RandomRock extends RandomisedFeature {
 
     NbtCompound feature() {
         NbtCompound config = new NbtCompound();
-        addRandomBlock(config, "state", "full_blocks");
+        addRandomBlock(config, "state", "stone_like_blocks");
         return feature(config);
     }
 }

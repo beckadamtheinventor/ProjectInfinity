@@ -29,8 +29,8 @@ public class RandomTree extends RandomisedFeature {
     NbtCompound feature() {
         NbtCompound config = new NbtCompound();
         addRandomBlockProvider(config, "dirt_provider", "full_blocks");
-        addRandomBlockProvider(config, "trunk_provider", "full_blocks_worldgen");
-        addRandomBlockProvider(config, "foliage_provider", "full_blocks_worldgen");
+        addRandomBlockProvider(config, "trunk_provider", "log_like_blocks");
+        addRandomBlockProvider(config, "foliage_provider", "leaf_like_blocks");
         config.putBoolean("force_dirt", random.nextBoolean());
         config.putBoolean("ignore_vines", random.nextBoolean());
         config.put("trunk_placer", trunkPlacer());

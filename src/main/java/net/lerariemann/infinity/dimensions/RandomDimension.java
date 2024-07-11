@@ -104,7 +104,7 @@ public class RandomDimension {
         sea_level = randomiseblocks ? (int)Math.floor(random.nextGaussian(sea_level_default, 8)) : sea_level_default;
         max_y = Math.max(max_y, 16 * (int) (1 + Math.floor(sea_level / 16.0)));
         height = max_y - min_y;
-        default_block = randomiseblocks ? PROVIDER.randomBlock(random, "full_blocks_worldgen") : RandomProvider.Block(defaultblock("minecraft:stone"));
+        default_block = randomiseblocks ? PROVIDER.randomBlock(random, "stone_like_blocks") : RandomProvider.Block(defaultblock("minecraft:stone"));
         default_fluid = randomiseblocks ? PROVIDER.randomFluid(random) : RandomProvider.Fluid(defaultfluid());
         deepslate = Arrays.stream((new String[]{"minecraft:overworld", "minecraft:amplified", "infinity:whack"})).toList().contains(type_alike) ?
                 RandomProvider.Block("minecraft:deepslate") : default_block;
@@ -214,14 +214,18 @@ public class RandomDimension {
         for (int i = 0; i < layer_count; i++) {
             int layerHeight = Math.min(heightLeft, 1 + (int) Math.floor(random.nextExponential() * 4));
             heightLeft -= layerHeight;
-            block = PROVIDER.randomName(random, "full_blocks_worldgen");
+            if (i + 1 == layer_count) {
+                block = PROVIDER.randomName(random, "ground_like_blocks");
+            } else {
+                block = PROVIDER.randomName(random, "stone_like_blocks");
+            }
             layers.add(superflatLayer(layerHeight, block));
             if (heightLeft <= 1) {
                 break;
             }
         }
         if (random.nextBoolean()) {
-            block = PROVIDER.randomName(random, "top_blocks");
+            block = PROVIDER.randomName(random, "ground_like_blocks");
             layers.add(superflatLayer(1, block));
         }
         res.putString("biome", biome);

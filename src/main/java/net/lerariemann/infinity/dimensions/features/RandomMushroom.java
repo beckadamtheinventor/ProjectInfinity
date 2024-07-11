@@ -16,8 +16,8 @@ public class RandomMushroom extends RandomisedFeature {
 
     NbtCompound feature() {
         NbtCompound config = new NbtCompound();
-        addRandomBlockProvider(config, "cap_provider", "full_blocks_worldgen");
-        addRandomBlockProvider(config, "stem_provider", "full_blocks_worldgen");
+        addRandomBlockProvider(config, "cap_provider", "leaf_like_blocks");
+        addRandomBlockProvider(config, "stem_provider", "log_like_blocks");
         config.put("valid_base_block", parent.surface_block);
         config.putInt("foliage_radius", random.nextBoolean() ? 2 : 1 + (int)Math.floor(random.nextExponential()*2));
         config.putInt("height", random.nextBoolean() ? 5 : random.nextInt(3, 7));
