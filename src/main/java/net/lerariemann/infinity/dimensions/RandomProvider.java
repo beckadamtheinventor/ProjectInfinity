@@ -310,8 +310,10 @@ public class RandomProvider {
             if (compound instanceof NbtCompound) return ((NbtCompound)compound);
             else return Block(compound.asString());
         }
-        else {
+        else if (registry.containsKey(key)) {
             return Block(registry.get(key).getRandomElement(random));
+        } else {
+            return Block(registry.get(0).getElement(0));
         }
     }
 

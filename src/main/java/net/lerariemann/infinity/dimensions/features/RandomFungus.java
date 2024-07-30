@@ -21,7 +21,7 @@ public class RandomFungus extends RandomisedFeature {
         NbtCompound config = new NbtCompound();
         addRandomBlock(config, "hat_state", "leaf_like_blocks");
         addRandomBlock(config, "decor_state", "plant_like_blocks");
-        addRandomBlock(config, "stem_state", "wood_like_blocks");
+        addRandomBlock(config, "stem_state", "log_like_blocks");
         NbtCompound replaceableBlocks = new NbtCompound();
         replaceableBlocks.putString("type", "minecraft:matching_block_tag");
         replaceableBlocks.putString("tag", PROVIDER.randomName(random, "tags").replace("#", ""));
